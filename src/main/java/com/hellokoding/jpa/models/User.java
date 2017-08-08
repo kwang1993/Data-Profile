@@ -1,4 +1,4 @@
-package com.hellokoding.jpa.model;
+package com.hellokoding.jpa.models;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,9 +11,18 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private int id;
+
+    @Column(name = "user_name")
     private String userName;
+
+    @Column(name = "password")
     private String password;// This password requires further processing
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Profile> profiles;
 
     public User(){
@@ -25,9 +34,6 @@ public class User {
         this.profiles = new HashSet<>();
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
     public int getId() {
         return id;
     }
@@ -36,7 +42,6 @@ public class User {
         this.id = id;
     }
 
-    @Column(name = "user_name")
     public String getUserName() {
         return userName;
     }
@@ -53,7 +58,6 @@ public class User {
         this.password = password;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     public Set<Profile> getProfiles() {
         return profiles;
     }

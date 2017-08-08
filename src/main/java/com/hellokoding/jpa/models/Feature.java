@@ -1,24 +1,31 @@
-package com.hellokoding.jpa.model;
+package com.hellokoding.jpa.models;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "feature")
 public class Feature {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "name")
     private String name;
+
+    @OneToMany
+    @JoinColumn(name = "id")
     private Set<ProfileFeature> profileFeatures;
 
     public Feature(){
-
     }
 
     public Feature(String name){
         this.name = name;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -35,7 +42,6 @@ public class Feature {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "feature")
     public Set<ProfileFeature> getProfileFeatures() {
         return profileFeatures;
     }

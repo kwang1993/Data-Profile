@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `jpa_manytomany_extracolumns` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `jpa_manytomany_extracolumns`;
+CREATE DATABASE  IF NOT EXISTS `data_profile` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `data_profile`;
 DROP TABLE IF EXISTS `profile_feature`;
 DROP TABLE IF EXISTS `feature`;
 DROP TABLE IF EXISTS `profile`;

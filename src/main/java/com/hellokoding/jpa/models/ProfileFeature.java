@@ -1,4 +1,4 @@
-package com.hellokoding.jpa.model;
+package com.hellokoding.jpa.models;
 
 import javax.persistence.*;
 import java.io.Serializable;

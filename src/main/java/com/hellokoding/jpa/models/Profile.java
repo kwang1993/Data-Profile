@@ -1,29 +1,40 @@
-package com.hellokoding.jpa.model;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnJava;
+package com.hellokoding.jpa.models;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "profile")
 public class Profile{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProfileFeature> profileFeatures;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Profile() {
     }
-
+    public Profile(String name) {
+        this.name = name;
+        profileFeatures = new HashSet<>();
+    }
     public Profile(String name, User user) {
         this.name = name;
         profileFeatures = new HashSet<>();
         this.user = user;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     public int getId() {
         return id;
     }
@@ -40,7 +51,6 @@ public class Profile{
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
 
     // if profile.profileFeatures doesn't contain a profilepuslisher, then not show in profilepublisher table
     public Set<ProfileFeature>   getProfileFeatures() {
@@ -51,8 +61,7 @@ public class Profile{
         this.profileFeatures = profileFeatures;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+
     public User getUser() {
         return user;
     }
