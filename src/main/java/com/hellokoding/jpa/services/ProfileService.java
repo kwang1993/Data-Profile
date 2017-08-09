@@ -5,7 +5,6 @@ import com.hellokoding.jpa.repositories.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 /**
  * Created by wangkaicheng on 2017/8/2.
  */
@@ -38,4 +37,5 @@ public class ProfileService {
     public Profile findOne(Integer id){
         return profileRepository.findOne(id);
     }
+
 }

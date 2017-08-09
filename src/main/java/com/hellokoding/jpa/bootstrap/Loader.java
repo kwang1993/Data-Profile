@@ -13,6 +13,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
+
 
 /**
  * Created by wangkaicheng on 2017/8/3.
@@ -23,18 +25,26 @@ import org.springframework.stereotype.Component;
 @Component
 
 public class Loader implements ApplicationListener<ContextRefreshedEvent> {
-    @Autowired
-    private FeatureRepository featureRepository;
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private ProfileRepository profileRepository;
+    @Autowired
+    private FeatureRepository featureRepository;
 
     private Logger log = Logger.getLogger(Loader.class);
 
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
+
+        userRepository.deleteAll();
+        profileRepository.deleteAll();
+        featureRepository.deleteAll();
+
+
         User user = new User("testUser", "testPassword");
         userRepository.save(user);
 
@@ -49,7 +59,6 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
         profileA.getProfileFeatures().add(profileFeature);
         profileRepository.save(profileA);
 
-        userRepository.delete(user);
 
     }
 }

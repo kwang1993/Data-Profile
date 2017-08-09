@@ -1,4 +1,7 @@
-# JPA Relationship Mapping Example with Spring Boot, Maven and MySQL
+# JPA Many-To-Many Extra Columns Relationship Mapping Example with Spring Boot, Maven and MySQL
+
+## Guide
+https://hellokoding.com/jpa-many-to-many-extra-columns-relationship-mapping-example-with-spring-boot-maven-and-mysql/
 
 ## Prerequisites
 - JDK 1.8 or later
@@ -10,5 +13,6 @@
 - Spring Boot
 - MySQL
 
-
+## Run
+`mvn spring-boot:run`
 

@@ -27,7 +27,11 @@ public class User {
 
     public User(){
     }
-
+    public User(String userName) {
+        this.userName = userName;
+        this.password = "";
+        this.profiles = new HashSet<>();
+    }
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;

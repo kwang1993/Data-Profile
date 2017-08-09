@@ -15,8 +15,7 @@ public class Feature {
     @Column(name = "name")
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "id")
+    @OneToMany(mappedBy = "feature")
     private Set<ProfileFeature> profileFeatures;
 
     public Feature(){
