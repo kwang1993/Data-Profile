@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <title>Spring Framework</title>
+    <title>Data Profile Management</title>
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
@@ -17,12 +17,14 @@
                 <th>Name</th>
                 <th>View</th>
                 <th>Edit</th>
+                <th>Delete</th>
             </tr>
             <tr th:each="profile : ${profiles}">
                 <td th:text="${profile.id}"><a href="/profiles/${profile.id}">Id</a></td>
                 <td th:text="${profile.name}">Profile Name</td>
                 <td><a th:href="${ '/profile/' + profile.id}">View</a></td>
                 <td><a th:href="${'/profile/edit/' + profile.id}">Edit</a></td>
+                <td><a th:href="${'/profile/delete/' + profile.id}">Delete</a></td>
             </tr>
         </table>
 

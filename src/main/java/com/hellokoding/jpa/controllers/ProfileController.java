@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ProfileController {
     @Autowired
     private ProfileService profileService;
-    @Autowired
-    private UserService userService;
 
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public String list(Model model){
@@ -40,6 +38,12 @@ public class ProfileController {
         return "profileform";
     }
 
+    @RequestMapping("profile/delete/{id}")
+    public String delete(@PathVariable Integer id, Model model){
+        profileService.delete(id);
+        return "redirect:/profiles";
+    }
+
     @RequestMapping("profile/new")
     public String newProfile(Model model){
         model.addAttribute("profile", new Profile());
@@ -48,9 +52,7 @@ public class ProfileController {
 
     @RequestMapping(value = "profile", method = RequestMethod.POST) // Update is problematic since linked to profileFeature
     public String saveProfile(Profile profile) {
-
         profileService.save(profile);
-
         return "redirect:/profile/" + profile.getId();
     }
 

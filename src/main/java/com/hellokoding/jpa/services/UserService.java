@@ -5,6 +5,8 @@ import com.hellokoding.jpa.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
+
 
 /**
  * Created by wangkaicheng on 2017/8/2.
@@ -39,4 +41,19 @@ public class UserService {
         return userRepository.findOne(id);
     }
 
+    public User findByUserNameAndPassword(String userName, String password){
+        return userRepository.findByUserNameAndPassword(userName, password);
+    }
+
+    public User findByUserName(String userName){
+        return userRepository.findByUserName(userName);
+    }
+
+    public boolean isValidUser(User user){
+        if(userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword()) != null)
+        //if(user.getUserName().equals("aaa") && user.getPassword().equals("bbb"))
+            return true;
+        else
+            return false;
+    }
 }
