@@ -1,0 +1,17 @@
+drop database data_profile;
+create database data_profile;
+use data_profile;
+create table feature (feature_id integer not null auto_increment, feature_name varchar(255), primary key (feature_id));
+create table profile (profile_id integer not null auto_increment, profile_name varchar(255), user_id integer, primary key (profile_id));
+create table profile_feature (profile_id integer not null, feature_id integer not null, feature_value varchar(255), primary key (profile_id, feature_id));
+create table role (role_id integer not null auto_increment, role_name varchar(255), primary key (role_id));
+create table user (user_id integer not null auto_increment, user_name varchar(255) not null, password varchar(255) not null, primary key (user_id));
+create table user_role (user_id integer not null, role_id integer not null, primary key (user_id, role_id));
+alter table feature add constraint UK_gqa31umtnrjdnp8r5vrh44doa unique (feature_name);
+alter table role add constraint UK_iubw515ff0ugtm28p8g3myt0h unique (role_name);
+alter table user add constraint UK_lqjrcobrh9jc8wpcar64q1bfh unique (user_name);
+alter table profile add constraint FKawh070wpue34wqvytjqr4hj5e foreign key (user_id) references user (user_id) on delete cascade on update cascade;
+alter table profile_feature add constraint FKcnjxagewpa8v84satilsc0dx5 foreign key (profile_id) references profile (profile_id) on delete cascade on update cascade;
+alter table profile_feature add constraint FKhu5694o1bawu2p638j8e8fun9 foreign key (feature_id) references feature (feature_id) on delete cascade on update cascade;
+alter table user_role add constraint FKa68196081fvovjhkek5m97n3y foreign key (role_id) references role (role_id) on delete cascade on update cascade;
+alter table user_role add constraint FK859n2jvi8ivhui0rl0esws6o foreign key (user_id) references user (user_id) on delete cascade on update cascade;
