@@ -47,6 +47,8 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
     @Query(value = "select feature_id, feature_value from profile_feature where profile_id = ?1", nativeQuery = true)
     public List<Object[]> findProfileFeatureByProfileId(int profile_id);
 
+    @Query(value = "select profile_id, feature_id, feature_value from profile_feature", nativeQuery = true)
+    public List<Object[]> findAllProfileFeatures();
 
 //    @Query(value = "select f.feature_name, pf.feature_value from profile_feature pf, feature f, profile p where pf.feature_id=f.feature_id and pf.profile_id=p.profile_id and p.profile_name=?1", nativeQuery = true)
 //    @Modifying

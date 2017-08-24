@@ -20,6 +20,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "select role_id from user_role where user_id = ?1", nativeQuery = true)
     public List<Object> findUserRoleByUserId(int user_id);
 
+    @Query(value = "select user_id, role_id from user_role", nativeQuery = true)
+    public List<Object[]> findAllUserRoles();
+
     @Query(value = "delete from user_role where user_id = ?1 and role_id = ?2", nativeQuery = true)
     @Modifying
     @Transactional

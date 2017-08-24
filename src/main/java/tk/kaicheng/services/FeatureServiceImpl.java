@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import tk.kaicheng.models.Feature;
 import tk.kaicheng.repositories.FeatureRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by wangkaicheng on 2017/8/2.
@@ -44,6 +47,11 @@ public class FeatureServiceImpl implements FeatureService {
     @Override
     public Feature findOne(Integer id){
         return featureRepository.findOne(id);
+    }
+
+    @Override
+    public List<Object[]> findProfileFeatureByFeatureId(int feature_id) {
+        return featureRepository.findProfileFeatureByFeatureId(feature_id);
     }
 
 }

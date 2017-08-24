@@ -67,6 +67,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findByUserName(userName);
     }
 
+    @Override
+    public List<Object> findUserRoleByUserId(int user_id) {
+        return userRepository.findUserRoleByUserId( user_id);
+    }
+
+    @Override
+    public List<Object[]> findAllUserRoles() {
+        return userRepository.findAllUserRoles();
+    }
+
+    @Override
+    public void deleteUserRoleById(int user_id, int role_id) {
+        userRepository.deleteUserRoleById(user_id, role_id);
+    }
+
+    @Override
+    public void saveUserRole(int user_id, int role_id) {
+        userRepository.saveUserRole(user_id, role_id);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

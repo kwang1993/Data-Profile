@@ -139,6 +139,13 @@ public class RepositoryTest {
     }
 
     @Test
+    public void deleteAllRoles(){
+        roleRepository.deleteAll();
+        assertEquals(roleRepository.findAll().size(), 0);
+        assertEquals(userRepository.findAllUserRoles().size(), 0);
+    }
+
+    @Test
     public void testUpdateUser(){
         // update testUser and change it back
         String userName = "testUser";
@@ -166,6 +173,15 @@ public class RepositoryTest {
     }
 
     @Test
+    public void deleteAllUsers(){
+        userRepository.deleteAll();
+        assertEquals(userRepository.findAll().size(), 0);
+        assertEquals(profileRepository.findAll().size(), 0);
+        assertEquals(profileRepository.findAllProfileFeatures().size(), 0);
+        assertEquals(userRepository.findAllUserRoles().size(), 0);
+    }
+
+    @Test
     public void testUpdateProfile(){
         // update testUser and change it back
         String profileName = "testProfile";
@@ -187,6 +203,13 @@ public class RepositoryTest {
         profileRepository.delete(profile.getId());
         assertNull(profileRepository.findByProfileName(profileName));
         assertEquals(profileRepository.findProfileFeatureByProfileId(profile.getId()).size(), 0);
+    }
+
+    @Test
+    public void deleteAllProfiles(){
+        profileRepository.deleteAll();
+        assertEquals(profileRepository.findAll().size(), 0);
+        assertEquals(profileRepository.findAllProfileFeatures().size(), 0);
     }
 
     @Test
@@ -213,6 +236,13 @@ public class RepositoryTest {
         assertNull(featureRepository.findByFeatureName(featureName));
         assertEquals(featureRepository.findProfileFeatureByFeatureId(feature.getId()).size(), 0);
 
+    }
+
+    @Test
+    public void deleteAllFeatures(){
+        featureRepository.deleteAll();
+        assertEquals(featureRepository.findAll().size(), 0);
+        assertEquals(profileRepository.findAllProfileFeatures().size(), 0);
     }
 
     @Test

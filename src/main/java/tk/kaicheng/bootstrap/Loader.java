@@ -2,7 +2,9 @@ package tk.kaicheng.bootstrap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.kaicheng.models.*;
@@ -34,43 +36,50 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private RoleRepository roleRepository;
 
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
 
         userRepository.deleteAll();
-        profileRepository.deleteAll();
+//        profileRepository.deleteAll();
         featureRepository.deleteAll();
         roleRepository.deleteAll();
 
-        Role roleAdmin = new Role();
-        roleAdmin.setRoleName("ADMIN");
-        roleRepository.save(roleAdmin);
-        Role roleUser = new Role();
-        roleUser.setRoleName("USER");
-        roleRepository.save(roleUser);
+        String adminRoleName = "ADMIN";
+        String userRoleName = "USER";
+        if(roleRepository.findByRoleName(adminRoleName) == null){
+            Role roleAdmin = new Role();
+            roleAdmin.setRoleName(adminRoleName);
+            roleRepository.save(roleAdmin);
+        }
+        if(roleRepository.findByRoleName(userRoleName) == null) {
+            Role roleUser = new Role();
+            roleUser.setRoleName(userRoleName);
+            roleRepository.save(roleUser);
+        }
+//        String root = "root";
+//        if(userRepository.findByUserName(root) == null){
+//            User user = new User();
+//            user.setUserName("root");
+//            user.setPassword("123456");
+//            Set<Role> set = new HashSet<>();
+//            set.add(roleRepository.findByRoleName(adminRoleName));
+//            user.setRoles(set);
+//            userRepository.save(user);
+//        }
 
-        User user = new User();
-        user.setUserName("testUser");
-        user.setPassword("testPassword");
-        Set<Role> set = new HashSet<>();
-        set.add(roleUser);
-        user.setRoles(set);
-        userRepository.save(user);
-
-        Feature featureA = new Feature();
-        featureA.setFeatureName("testFeature");
-        featureRepository.save(featureA);
-
-        Profile profileA = new Profile();
-        profileA.setProfileName("testProfile");
-        profileA.setUser(user);
-        ProfileFeature profileFeature = new ProfileFeature();
-        profileFeature.setProfile(profileA);
-        profileFeature.setFeature(featureA);
-        profileFeature.setFeatureValue("testValue");
-        profileA.getProfileFeatures().add(profileFeature);
-        profileRepository.save(profileA);
+//
+//        Feature featureA = new Feature();
+//        featureA.setFeatureName("age");
+//        featureRepository.save(featureA);
+//
+//        Profile profileA = new Profile();
+//        profileA.setProfileName("patientProfile");
+//        profileA.setUser(user);
+//        profileRepository.save(profileA);
+//
+//        profileRepository.saveProfileFeature(profileA.getId(), featureA.getId(), "22");
 
 
     }

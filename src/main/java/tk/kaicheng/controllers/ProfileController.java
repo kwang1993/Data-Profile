@@ -51,7 +51,10 @@ public class ProfileController {
 
     @RequestMapping(value = "profile", method = RequestMethod.POST)
     public String saveProfile(Profile profile) {
-        profileService.save(profile);
+        if(profileService.findOne(profile.getId()) == null)
+            profileService.save(profile);
+        else
+            profileService.updateProfileName(profile.getId(), profile.getProfileName());
         return "redirect:/profile/" + profile.getId();
     }
 

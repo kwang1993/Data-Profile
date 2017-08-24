@@ -44,8 +44,8 @@ public class UserController {
         User userExists = userService.findByUserName(user.getUserName());
         if (userExists != null) {
             bindingResult
-                    .rejectValue("userName", "error.user",
-                            "There is already a user registered with the email provided");
+                    .rejectValue("userName", "error.userName",
+                            "There is already a user registered");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
@@ -60,26 +60,26 @@ public class UserController {
     }
 
 
-    @RequestMapping(value="/admin/home", method = RequestMethod.GET)
+    @RequestMapping(value="/admin/index", method = RequestMethod.GET)
     public ModelAndView adminHome(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUserName(auth.getName());
         modelAndView.addObject("userName", "Welcome " + user.getUserName() );
         modelAndView.addObject("userMessage","Contents only for admin.");
-        modelAndView.setViewName("admin/home");
+        modelAndView.setViewName("admin/index");
         return modelAndView;
     }
 
 
-    @RequestMapping(value="/user/home", method = RequestMethod.GET)
+    @RequestMapping(value="/user/index", method = RequestMethod.GET)
     public ModelAndView userHome(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUserName(auth.getName());
         modelAndView.addObject("userName", "Welcome " + user.getUserName() );
         modelAndView.addObject("userMessage","Contents only for user.");
-        modelAndView.setViewName("user/home");
+        modelAndView.setViewName("user/index");
         return modelAndView;
     }
 
