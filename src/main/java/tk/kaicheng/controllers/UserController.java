@@ -49,11 +49,11 @@ public class UserController {
             return "registration";
         } else {
             userService.save(user);
-            model.addAttribute("successMessage", "User has been registered successfully!");
-            model.addAttribute("user", new User());
+            return "postRegistration";
         }
-        return "registration";
+
     }
+
 
     @RequestMapping(value="/postLogin", method = RequestMethod.GET)
     public String postLogin(Model model){

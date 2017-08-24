@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>User Home </title>
+    <title>User Home</title>
+    <th:block th:include="fragments/header :: static"></th:block>
 </head>
 <body>
+    <th:block th:include="fragments/header :: header"></th:block>
 
+    <div class="container">
+
+    </div>
+    <!-- /.container -->
+
+    <th:block th:include="fragments/footer :: footer"></th:block>
 </body>
 </html>
