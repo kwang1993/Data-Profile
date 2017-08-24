@@ -40,7 +40,7 @@ public class FeatureServiceImpl implements FeatureService {
     }
 
     @Override
-    public Iterable <Feature> findAll(){
+    public List <Feature> findAll(){
         return featureRepository.findAll();
     }
 

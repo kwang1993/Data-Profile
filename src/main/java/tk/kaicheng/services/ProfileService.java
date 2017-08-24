@@ -21,7 +21,7 @@ public interface ProfileService {
 
     void delete(Profile profile);
 
-    Iterable <Profile> findAll();
+    List <Profile> findAll();
 
     Profile findOne(Integer id);
 

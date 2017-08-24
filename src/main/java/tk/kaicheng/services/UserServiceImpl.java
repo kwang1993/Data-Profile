@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Iterable <User> findAll(){
+    public List <User> findAll(){
         return userRepository.findAll();
     }
 
@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(username);
+        if(user == null) throw new UsernameNotFoundException("User name not found");
         List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
         return buildUserForAuthentication(user, authorities);
     }

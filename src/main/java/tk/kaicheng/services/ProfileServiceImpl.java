@@ -39,7 +39,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Iterable <Profile> findAll(){
+    public List <Profile> findAll(){
         return profileRepository.findAll();
     }
 

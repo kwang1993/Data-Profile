@@ -36,6 +36,7 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private RoleRepository roleRepository;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -58,16 +59,16 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
             roleUser.setRoleName(userRoleName);
             roleRepository.save(roleUser);
         }
-//        String root = "root";
-//        if(userRepository.findByUserName(root) == null){
-//            User user = new User();
-//            user.setUserName("root");
-//            user.setPassword("123456");
-//            Set<Role> set = new HashSet<>();
-//            set.add(roleRepository.findByRoleName(adminRoleName));
-//            user.setRoles(set);
-//            userRepository.save(user);
-//        }
+        String root = "root";
+        if(userRepository.findByUserName(root) == null){
+            User user = new User();
+            user.setUserName(root);
+            user.setPassword(bCryptPasswordEncoder.encode("123456"));
+            Set<Role> set = new HashSet<>();
+            set.add(roleRepository.findByRoleName(adminRoleName));
+            user.setRoles(set);
+            userRepository.save(user);
+        }
 
 //
 //        Feature featureA = new Feature();

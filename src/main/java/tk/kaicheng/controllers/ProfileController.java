@@ -19,43 +19,43 @@ public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
-    @RequestMapping(value = "/profiles", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/profiles", method = RequestMethod.GET)
     public String list(Model model){
         model.addAttribute("profiles", profileService.findAll());
-        return "profiles";
+        return "/user/profiles";
     }
 
-    @RequestMapping("profile/{id}")
+    @RequestMapping(value = "/user/profile/{id}", method = RequestMethod.GET)
     public String showProfile(@PathVariable Integer id, Model model){
         model.addAttribute("profile", profileService.findOne(id));
-        return "profileshow";
+        return "/user/profileshow";
     }
 
-    @RequestMapping("profile/edit/{id}")
+    @RequestMapping(value = "/user/profile/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable Integer id, Model model){
         model.addAttribute("profile", profileService.findOne(id));
-        return "profileform";
+        return "/user/profileform";
     }
 
-    @RequestMapping("profile/delete/{id}")
+    @RequestMapping(value = "/user/profile/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer id, Model model){
         profileService.delete(id);
-        return "redirect:/profiles";
+        return "redirect:/user/profiles";
     }
 
-    @RequestMapping("profile/new")
+    @RequestMapping(value = "/user/profile/new", method = RequestMethod.GET)
     public String newProfile(Model model){
         model.addAttribute("profile", new Profile());
-        return "profileform";
+        return "/user/profileform";
     }
 
-    @RequestMapping(value = "profile", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/profile", method = RequestMethod.POST)
     public String saveProfile(Profile profile) {
         if(profileService.findOne(profile.getId()) == null)
             profileService.save(profile);
         else
             profileService.updateProfileName(profile.getId(), profile.getProfileName());
-        return "redirect:/profile/" + profile.getId();
+        return "redirect:/user/profile/" + profile.getId();
     }
 
 }

@@ -15,4 +15,5 @@ Profile n:n Feature (Profile 1:n ProfileFeatureMapping; ProfileFeatureMapping n:
 Spring Boot <br />
 JPA <br />
 Hibernate <br />
-Thymeleaf <br /> 
+Thymeleaf <br />
+Spring Security  

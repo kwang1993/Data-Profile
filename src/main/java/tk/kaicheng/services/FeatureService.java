@@ -18,7 +18,7 @@ public interface FeatureService {
 
     void delete(Feature feature);
 
-    Iterable <Feature> findAll();
+    List <Feature> findAll();
 
     Feature findOne(Integer id);
 

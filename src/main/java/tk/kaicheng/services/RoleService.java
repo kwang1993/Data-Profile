@@ -20,7 +20,7 @@ public interface RoleService {
 
     void delete(Role role);
 
-    Iterable <Role> findAll();
+    List <Role> findAll();
 
     Role findOne(Integer id);
 

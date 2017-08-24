@@ -20,7 +20,7 @@ public interface UserService {
 
     void delete(User user);
 
-    Iterable <User> findAll();
+    List <User> findAll();
 
     User findOne(Integer id);
 
