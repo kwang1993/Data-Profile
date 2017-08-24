@@ -15,8 +15,4 @@ Profile n:n Feature (Profile 1:n ProfileFeatureMapping; ProfileFeatureMapping n:
 Spring Boot <br />
 JPA <br />
 Hibernate <br />
-<<<<<<< HEAD
 Thymeleaf <br /> 
-=======
-Thymeleaf <br /> 
->>>>>>> origin/master
