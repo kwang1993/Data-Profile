@@ -26,11 +26,11 @@ public interface UserService {
 
     User findByUserName(String userName);
 
-    public List<Object> findUserRoleByUserId(int user_id);
+    List<Object> findUserRoleByUserId(int user_id);
 
-    public List<Object[]> findAllUserRoles();
+    List<Object[]> findAllUserRoles();
 
-    public void deleteUserRoleById(int user_id, int role_id);
+    void deleteUserRoleById(int user_id, int role_id);
 
-    public void saveUserRole(int user_id, int role_id);
+    void saveUserRole(int user_id, int role_id);
 }

@@ -69,7 +69,7 @@ public class UserController {
         return "redirect:/user/index";
     }
 
-    @RequestMapping(value="/admin/index", method = RequestMethod.GET)
+    @RequestMapping(value={"/admin", "/admin/index"}, method = RequestMethod.GET)
     public String adminIndex(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUserName(auth.getName());
@@ -78,7 +78,7 @@ public class UserController {
         return "/admin/index";
     }
 
-    @RequestMapping(value="/user/index", method = RequestMethod.GET)
+    @RequestMapping(value={"/user", "/user/index"}, method = RequestMethod.GET)
     public String userIndex(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUserName(auth.getName());

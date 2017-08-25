@@ -26,5 +26,5 @@ public interface RoleService {
 
     Role findByRoleName(String role);
 
-    public List<Object> findUserRoleByRoleId(int role_id);
+    List<Object> findUserRoleByRoleId(int role_id);
 }

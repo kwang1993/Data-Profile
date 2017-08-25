@@ -29,17 +29,17 @@ public interface ProfileService {
 
     List<Profile> findByUser(User user);
 
-    public void updateProfileName(int profile_id, String newProfileName);
+    void updateProfileName(int profile_id, String newProfileName);
 
-    public void saveProfileFeature(int profile_id, int feature_id, String featureValue);
+    void saveProfileFeature(int profile_id, int feature_id, String featureValue);
 
-    public void deleteProfileFeatureById(int profile_id, int feature_id);
+    void deleteProfileFeatureById(int profile_id, int feature_id);
 
-    public void updateProfileFeatureByFeatureValue(int profile_id, int feature_id, String newFeatureValue);
+    void updateProfileFeatureByFeatureValue(int profile_id, int feature_id, String newFeatureValue);
 
-    public String findProfileFeatureById(int profile_id, int feature_id);
+    String findProfileFeatureById(int profile_id, int feature_id);
 
-    public List<Object[]> findProfileFeatureByProfileId(int profile_id);
+    List<Object[]> findProfileFeatureByProfileId(int profile_id);
 
-    public List<Object[]> findAllProfileFeatures();
+    List<Object[]> findAllProfileFeatures();
 }

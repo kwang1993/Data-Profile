@@ -14,5 +14,5 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
 	Role findByRoleName(String role);
 
 	@Query(value = "select user_id from user_role where role_id = ?1", nativeQuery = true)
-	public List<Object> findUserRoleByRoleId(int role_id);
+	List<Object> findUserRoleByRoleId(int role_id);
 }

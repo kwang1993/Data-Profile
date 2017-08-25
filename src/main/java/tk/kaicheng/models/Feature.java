@@ -11,11 +11,15 @@ public class Feature {
     @Column(name = "feature_id")
     private int id;
 
-    @Column(name = "feature_name", unique = true)
+    @Column(name = "feature_name")
     private String featureName;
 
     @OneToMany(mappedBy = "feature")
     private Set<ProfileFeature> profileFeatures;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public int getId() {
         return id;
@@ -39,5 +43,13 @@ public class Feature {
 
     public void setProfileFeatures(Set<ProfileFeature> profileFeatures) {
         this.profileFeatures = profileFeatures;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

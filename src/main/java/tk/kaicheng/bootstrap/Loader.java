@@ -42,10 +42,10 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
 
-        userRepository.deleteAll();
+//        userRepository.deleteAll();
 //        profileRepository.deleteAll();
-        featureRepository.deleteAll();
-        roleRepository.deleteAll();
+//        featureRepository.deleteAll();
+//        roleRepository.deleteAll();
 
         String adminRoleName = "ADMIN";
         String userRoleName = "USER";
@@ -64,7 +64,7 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
         if(userRepository.findByUserName(root) == null){
             User user = new User();
             user.setUserName(root);
-            user.setPassword(bCryptPasswordEncoder.encode("123456"));
+            user.setPassword(bCryptPasswordEncoder.encode("Guess my password, hehe."));
             Set<Role> set = new HashSet<>();
             set.add(roleRepository.findByRoleName(adminRoleName));
             user.setRoles(set);
@@ -75,7 +75,17 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
         if(userRepository.findByUserName(name) == null){
             User user = new User();
             user.setUserName(name);
-            user.setPassword(bCryptPasswordEncoder.encode("123456"));
+            user.setPassword(bCryptPasswordEncoder.encode("kaicheng"));
+            Set<Role> set = new HashSet<>();
+            set.add(roleRepository.findByRoleName(userRoleName));
+            user.setRoles(set);
+            userRepository.save(user);
+        }
+        name = "harrison";
+        if(userRepository.findByUserName(name) == null){
+            User user = new User();
+            user.setUserName(name);
+            user.setPassword(bCryptPasswordEncoder.encode("harrison"));
             Set<Role> set = new HashSet<>();
             set.add(roleRepository.findByRoleName(userRoleName));
             user.setRoles(set);

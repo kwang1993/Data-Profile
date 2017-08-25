@@ -37,6 +37,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Profile> profiles;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Feature> features;
+
     public int getId() {
         return id;
     }
@@ -75,5 +78,13 @@ public class User {
 
     public void setProfiles(Set<Profile> profiles) {
         this.profiles = profiles;
+    }
+
+    public Set<Feature> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(Set<Feature> features) {
+        this.features = features;
     }
 }
