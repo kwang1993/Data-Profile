@@ -10,7 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import tk.kaicheng.error.MyAccessDeniedHandler;
 
 /**
  * Created by wangkaicheng on 2017/8/20.
@@ -22,6 +24,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private MyAccessDeniedHandler accessDeniedHandler;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -57,8 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
                 .and()
-                .exceptionHandling()
-                .accessDeniedPage("/access-denied");
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
     @Override
     public void configure(WebSecurity web) throws Exception {

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head lang="en" th:fragment="static">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div th:fragment="jumbo">
+        <div class="container">
+
+            <div class="jumbotron">
+                <div class="row text-center">
+                    <div class="">
+                        <h2>Data Profile Management</h2>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <img src="../../static/images/jumbo.png" width="400"
+                         th:src="@{/images/jumbo.png}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

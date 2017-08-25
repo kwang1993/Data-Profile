@@ -7,15 +7,16 @@
 <body>
 <div th:fragment="footer">
     <div class="container">
-        <footer>
-        <!-- this is footer -->
-        &copy; 2017 Kaicheng Wang
-            <span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
+        <footer th:align="center">
+        <!-- this is footer
+
+            <span sec:authorize="isAuthenticated()" >
+                Logged user: <span sec:authentication="name"></span> |
                 Roles: <span sec:authentication="principal.authorities"></span> |
                 <a th:href="@{/logout}">Sign Out</a>
             </span>
-
+            <br>-->
+            &copy; 2017 Kaicheng Wang
 
         </footer>
     </div>

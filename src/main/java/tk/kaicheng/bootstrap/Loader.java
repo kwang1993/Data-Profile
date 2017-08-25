@@ -59,6 +59,7 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
             roleUser.setRoleName(userRoleName);
             roleRepository.save(roleUser);
         }
+        // create an admin called root and password is 123456
         String root = "root";
         if(userRepository.findByUserName(root) == null){
             User user = new User();
@@ -69,7 +70,17 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
             user.setRoles(set);
             userRepository.save(user);
         }
-
+        // create a user called kaicheng and password is 123456
+        String name = "kaicheng";
+        if(userRepository.findByUserName(name) == null){
+            User user = new User();
+            user.setUserName(name);
+            user.setPassword(bCryptPasswordEncoder.encode("123456"));
+            Set<Role> set = new HashSet<>();
+            set.add(roleRepository.findByRoleName(userRoleName));
+            user.setRoles(set);
+            userRepository.save(user);
+        }
 //
 //        Feature featureA = new Feature();
 //        featureA.setFeatureName("age");
