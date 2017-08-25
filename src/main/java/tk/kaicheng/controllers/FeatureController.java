@@ -28,7 +28,6 @@ public class FeatureController {
     private UserService userService;
 
     // get user from security context
-
     private User getContextUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUserName(auth.getName());

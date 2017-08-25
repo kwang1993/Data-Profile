@@ -3,10 +3,12 @@ package tk.kaicheng.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.kaicheng.POJO.FeatureAndValue;
 import tk.kaicheng.models.Profile;
 import tk.kaicheng.models.User;
 import tk.kaicheng.repositories.ProfileRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,8 +51,8 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Profile findByProfileName(String profileName) {
-        return profileRepository.findByProfileName(profileName);
+    public Profile findByProfileNameAndUser(String profileName, User user){
+        return profileRepository.findByProfileNameAndUser(profileName, user);
     }
 
     @Override
@@ -81,6 +83,25 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public String findProfileFeatureById(int profile_id, int feature_id) {
         return profileRepository.findProfileFeatureById(profile_id, feature_id);
+    }
+
+    @Override
+    public List<FeatureAndValue> findFeatureAndValuesByProfileId(int profile_id) {
+        List<Object[]> ls = profileRepository.findFeatureAndValuesByProfileId(profile_id);
+        List <FeatureAndValue> res = new ArrayList<>();
+        if(ls == null || ls.size() == 0 ) return res;
+        for(Object [] objects : ls ){
+            FeatureAndValue featureAndValue = new FeatureAndValue((int)objects[0], (int)objects[1], (String)objects[2], (String)objects[3]);
+            res.add(featureAndValue);
+        }
+        return res;
+    }
+
+    @Override
+    public FeatureAndValue findFeatureAndValueById(int profile_id, int feature_id) {
+        Object[] objects = profileRepository.findFeatureAndValueById(profile_id, feature_id);
+        FeatureAndValue featureAndValue = new FeatureAndValue((int)objects[0], (int)objects[1], (String)objects[2], (String)objects[3]);
+        return featureAndValue;
     }
 
     @Override

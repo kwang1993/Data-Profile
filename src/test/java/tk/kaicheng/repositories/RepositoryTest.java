@@ -80,25 +80,26 @@ public class RepositoryTest {
 
 
         // create profile
-        Profile profile = profileRepository.findByProfileName(profileName);
+        Profile profile = profileRepository.findByProfileNameAndUser(profileName, user);
         if(profile != null) {
             profileRepository.delete(profile);
-            assertNull(profileRepository.findByProfileName(profileName));
+            assertNull(profileRepository.findByProfileNameAndUser(profileName, user));
         }
         profile = new Profile();
         profile.setProfileName(profileName);
         profile.setUser(user);
         profile.setProfileFeatures(new HashSet<ProfileFeature>());
         profileRepository.save(profile); // profile must be persistent for profile feature
-        assertNotNull(profileRepository.findByProfileName(profileName).getUser());
+        assertNotNull(profileRepository.findByProfileNameAndUser(profileName, user).getUser());
 
         // create feature
-        Feature feature = featureRepository.findByFeatureName(featureName);
+        Feature feature = featureRepository.findByFeatureNameAndUser(featureName, user);
         if(feature == null){
             feature = new Feature();
             feature.setFeatureName(featureName);
+            feature.setUser(user);
             featureRepository.save(feature); // feature must be persistent for profileFeatures
-            assertNotNull(featureRepository.findByFeatureName(featureName));
+            assertNotNull(featureRepository.findByFeatureNameAndUser(featureName, user));
         }
 
         // create profile feature
@@ -184,24 +185,26 @@ public class RepositoryTest {
     @Test
     public void testUpdateProfile(){
         // update testUser and change it back
+        User user = userRepository.findByUserName("testUser");
         String profileName = "testProfile";
         String newProfileName = "newProfile";
-        Profile fetchedProfile = profileRepository.findByProfileName(profileName);
+        Profile fetchedProfile = profileRepository.findByProfileNameAndUser(profileName, user);
         if(fetchedProfile == null) return;
 
         profileRepository.updateProfileName(fetchedProfile.getId(), newProfileName);
-        assertNotNull(profileRepository.findByProfileName(newProfileName));
+        assertNotNull(profileRepository.findByProfileNameAndUser(newProfileName, user));
         profileRepository.updateProfileName(fetchedProfile.getId(), profileName);
-        assertNotNull(profileRepository.findByProfileName(profileName));
+        assertNotNull(profileRepository.findByProfileNameAndUser(profileName, user));
     }
 
     @Test
     public void testDeleteProfile(){
+        User user = userRepository.findByUserName("testUser");
         String profileName = "testProfile";
-        Profile profile = profileRepository.findByProfileName(profileName);
+        Profile profile = profileRepository.findByProfileNameAndUser(profileName, user);
         if(profile == null) return;
         profileRepository.delete(profile.getId());
-        assertNull(profileRepository.findByProfileName(profileName));
+        assertNull(profileRepository.findByProfileNameAndUser(profileName, user));
         assertEquals(profileRepository.findProfileFeatureByProfileId(profile.getId()).size(), 0);
     }
 
@@ -215,25 +218,27 @@ public class RepositoryTest {
     @Test
     public void testUpdateFeature(){
         // update testUser and change it back
+        User user = userRepository.findByUserName("testUser");
         String featureName = "testFeature";
         String newFeatureName = "newFeature";
-        Feature fetchedFeature = featureRepository.findByFeatureName(featureName);
+        Feature fetchedFeature = featureRepository.findByFeatureNameAndUser(featureName, user);
         if(fetchedFeature == null) return;
         fetchedFeature.setFeatureName(newFeatureName);
         featureRepository.save(fetchedFeature);
-        assertNotNull(featureRepository.findByFeatureName(newFeatureName));
+        assertNotNull(featureRepository.findByFeatureNameAndUser(newFeatureName, user));
         fetchedFeature.setFeatureName(featureName);
         featureRepository.save(fetchedFeature);
-        assertNotNull(featureRepository.findByFeatureName(featureName));
+        assertNotNull(featureRepository.findByFeatureNameAndUser(featureName, user));
     }
 
     @Test
     public void testDeleteFeature(){
-        String featureName = "testFeature1";
-        Feature feature = featureRepository.findByFeatureName(featureName);
+        User user = userRepository.findByUserName("testUser");
+        String featureName = "testFeature";
+        Feature feature = featureRepository.findByFeatureNameAndUser(featureName, user);
         if(feature == null) return;
         featureRepository.delete(feature.getId());
-        assertNull(featureRepository.findByFeatureName(featureName));
+        assertNull(featureRepository.findByFeatureNameAndUser(featureName, user));
         assertEquals(featureRepository.findProfileFeatureByFeatureId(feature.getId()).size(), 0);
 
     }
@@ -281,14 +286,14 @@ public class RepositoryTest {
 
     @Test
     public void testUpdateProfileFeature(){
-
+        User user = userRepository.findByUserName("testUser");
         String featureValue = "testFeatureValue";
         String newFeatureValue = "newFeatureValue";
         String profileName = "testProfile";
         String featureName = "testFeature";
 
-        Profile profile = profileRepository.findByProfileName(profileName);
-        Feature feature = featureRepository.findByFeatureName(featureName);
+        Profile profile = profileRepository.findByProfileNameAndUser(profileName, user);
+        Feature feature = featureRepository.findByFeatureNameAndUser(featureName, user);
         if(profile == null || feature == null) return;
 
         if(profileRepository.findProfileFeatureById(profile.getId(), feature.getId()) == null) return;
@@ -300,10 +305,11 @@ public class RepositoryTest {
 
     @Test
     public void testDeleteProfileFeature(){
+        User user = userRepository.findByUserName("testUser");
         String profileName = "testProfile";
         String featureName = "testFeature";
-        Profile profile = profileRepository.findByProfileName(profileName);
-        Feature feature = featureRepository.findByFeatureName(featureName);
+        Profile profile = profileRepository.findByProfileNameAndUser(profileName, user);
+        Feature feature = featureRepository.findByFeatureNameAndUser(featureName, user);
         if(profile == null || feature == null) return;
         if(profileRepository.findProfileFeatureById(profile.getId(), feature.getId()) == null) return;
         profileRepository.deleteProfileFeatureById(profile.getId(), feature.getId());

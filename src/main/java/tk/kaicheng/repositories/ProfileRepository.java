@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import tk.kaicheng.POJO.FeatureAndValue;
 import tk.kaicheng.models.Feature;
 import tk.kaicheng.models.Profile;
 import tk.kaicheng.models.ProfileFeature;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Integer> {
-    Profile findByProfileName(String profileName);
+    Profile findByProfileNameAndUser(String profileName, User user);
     List <Profile> findByUser(User user);
 
     @Query(value = "update profile set profile_name = ?2 where profile_id = ?1", nativeQuery = true)
@@ -26,7 +27,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
     @Transactional
     void updateProfileName(int profile_id, String newProfileName);
 
-    @Query(value = "insert into profile_feature values(?1, ?2, ?3)", nativeQuery = true)
+    @Query(value = "insert into profile_feature(profile_id, feature_id, feature_value) values(?1, ?2, ?3)", nativeQuery = true)
     @Modifying
     @Transactional
     void saveProfileFeature(int profile_id, int feature_id, String featureValue);
@@ -46,6 +47,12 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
     @Query(value = "select feature_id, feature_value from profile_feature where profile_id = ?1", nativeQuery = true)
     List<Object[]> findProfileFeatureByProfileId(int profile_id);
+
+    @Query(value = "select pf.profile_id, f.feature_id, f.feature_name, pf.feature_value from feature f, profile_feature pf where pf.profile_id = ?1 and pf.feature_id = f.feature_id", nativeQuery = true)
+    List<Object[]> findFeatureAndValuesByProfileId(int profile_id);
+
+    @Query(value = "select pf.profile_id, f.feature_id, f.feature_name, pf.feature_value from feature f, profile_feature pf where pf.profile_id = ?1 and f.feature_id = ?2 and pf.feature_id = f.feature_id", nativeQuery = true)
+    Object[] findFeatureAndValueById(int profile_id, int feature_id);
 
     @Query(value = "select profile_id, feature_id, feature_value from profile_feature", nativeQuery = true)
     List<Object[]> findAllProfileFeatures();

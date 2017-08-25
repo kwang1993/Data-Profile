@@ -4,6 +4,7 @@ package tk.kaicheng.services;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
+import tk.kaicheng.POJO.FeatureAndValue;
 import tk.kaicheng.models.Profile;
 import tk.kaicheng.models.User;
 
@@ -25,7 +26,7 @@ public interface ProfileService {
 
     Profile findOne(Integer id);
 
-    Profile findByProfileName(String profileName);
+    Profile findByProfileNameAndUser(String profileName, User user);
 
     List<Profile> findByUser(User user);
 
@@ -38,6 +39,10 @@ public interface ProfileService {
     void updateProfileFeatureByFeatureValue(int profile_id, int feature_id, String newFeatureValue);
 
     String findProfileFeatureById(int profile_id, int feature_id);
+
+    List<FeatureAndValue> findFeatureAndValuesByProfileId(int profile_id);
+
+    FeatureAndValue findFeatureAndValueById(int profile_id, int feature_id);
 
     List<Object[]> findProfileFeatureByProfileId(int profile_id);
 

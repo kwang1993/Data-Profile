@@ -25,6 +25,8 @@ public interface FeatureService {
 
     List <Feature> findByUser(User user);
 
+    Feature findByFeatureNameAndUser(String featureName, User user);
+
     void updateFeatureName(int feature_id, String newFeatureName);
 
     List<Object[]> findProfileFeatureByFeatureId(int feature_id);

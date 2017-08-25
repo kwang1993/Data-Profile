@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Repository
 public interface FeatureRepository extends JpaRepository<Feature, Integer> {
-    Feature findByFeatureName(String featureName);
+    Feature findByFeatureNameAndUser(String featureName, User user);
     List <Feature> findByUser(User user);
 
     @Query(value = "update feature set feature_name = ?2 where feature_id = ?1", nativeQuery = true)

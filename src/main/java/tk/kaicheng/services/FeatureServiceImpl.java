@@ -56,6 +56,11 @@ public class FeatureServiceImpl implements FeatureService {
     }
 
     @Override
+    public Feature findByFeatureNameAndUser(String featureName, User user) {
+        return featureRepository.findByFeatureNameAndUser(featureName, user);
+    }
+
+    @Override
     public void updateFeatureName(int feature_id, String newFeatureName) {
         featureRepository.updateFeatureName(feature_id, newFeatureName);
     }

@@ -3,7 +3,7 @@ create database data_profile;
 use data_profile;
 create table feature (feature_id integer not null auto_increment, feature_name varchar(255), user_id integer, primary key (feature_id));
 create table profile (profile_id integer not null auto_increment, profile_name varchar(255), user_id integer, primary key (profile_id));
-create table profile_feature (feature_value varchar(255), profile_id integer not null, feature_id integer not null, primary key (profile_id, feature_id));
+create table profile_feature (feature_value varchar(255),profile_id integer not null, feature_id integer not null,  primary key (profile_id, feature_id));
 create table role (role_id integer not null auto_increment, role_name varchar(255), primary key (role_id));
 create table user (user_id integer not null auto_increment, password varchar(255) not null, user_name varchar(255) not null, primary key (user_id));
 create table user_role (user_id integer not null, role_id integer not null, primary key (user_id, role_id));
