@@ -15,7 +15,6 @@ import tk.kaicheng.repositories.UserRepository;
 
 import java.util.*;
 
-
 /**
  * Created by wangkaicheng on 2017/8/2.
  */
@@ -86,7 +85,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void saveUserRole(int user_id, int role_id) {
         userRepository.saveUserRole(user_id, role_id);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

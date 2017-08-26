@@ -30,22 +30,26 @@ public class UserController {
 
     @RequestMapping(value={"/"}, method = RequestMethod.GET)
     public String home(){
+        System.out.println("Home");
         return "index";
     }
 
     @RequestMapping(value={"/login"}, method = RequestMethod.GET)
     public String login(){
+        System.out.println("login");
         return "login";
     }
 
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public String registration(Model model){
+        System.out.println("Register Get");
         model.addAttribute("user", new User());
         return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String createNewUser(@Valid User user, BindingResult bindingResult, Model model) {
+        System.out.println("Register Post");
         User userExists = userService.findByUserName(user.getUserName());
         if (userExists != null) {
             bindingResult.rejectValue("userName", "error.userName",
@@ -57,12 +61,11 @@ public class UserController {
             userService.save(user);
             return "postRegistration";
         }
-
-    }
-
+   }
 
     @RequestMapping(value="/postLogin", method = RequestMethod.GET)
     public String postLogin(Model model){
+        System.out.println("postLogin");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUserName(auth.getName());
         Set<Role> roles = user.getRoles();
@@ -76,6 +79,7 @@ public class UserController {
 
     @RequestMapping(value={"/admin", "/admin/index"}, method = RequestMethod.GET)
     public String adminIndex(Model model){
+        System.out.println("adminIndex");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUserName(auth.getName());
         model.addAttribute("userName", "Welcome " + user.getUserName() );
@@ -85,6 +89,7 @@ public class UserController {
 
     @RequestMapping(value={"/user", "/user/index"}, method = RequestMethod.GET)
     public String userIndex(Model model){
+        System.out.println("userIndex");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUserName(auth.getName());
         model.addAttribute("userName", "Welcome " + user.getUserName() );
@@ -94,6 +99,13 @@ public class UserController {
 
     @GetMapping("/403")
     public String error403() {
+        System.out.println("error");
         return "/error/403";
+    }
+
+    @GetMapping("/template")
+    public String template() {
+        System.out.println("template");
+        return "template";
     }
 }
