@@ -71,9 +71,9 @@ public class UserController {
         }
    }
 
-    @RequestMapping(value="/postLogin", method = RequestMethod.GET)
-    public String postLogin(Model model,HttpSession session){
-        System.out.println("postLogin");
+    @RequestMapping(value="/loginSuccess", method = RequestMethod.GET)
+    public String loginSuccess(Model model,HttpSession session){
+        System.out.println("loginSuccess");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
         Set<Role> roles = user.getRoles();
