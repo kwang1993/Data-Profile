@@ -28,6 +28,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // get user from security context
+    private User getContextUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByUsername(auth.getName());
+        return user;
+    }
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public String login(){
         return "login";
@@ -41,9 +47,9 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String createNewUser(@Valid User user, BindingResult bindingResult, Model model) {
-        User userExists = userService.findByUserName(user.getUserName());
+        User userExists = userService.findByUsername(user.getUsername());
         if (userExists != null) {
-            bindingResult.rejectValue("userName", "error.userName",
+            bindingResult.rejectValue("username", "error.username",
                             "There is already a user registered");
         }
         if (bindingResult.hasErrors()) {
@@ -55,11 +61,9 @@ public class UserController {
 
     }
 
-
     @RequestMapping(value="/postLogin", method = RequestMethod.GET)
     public String postLogin(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUserName(auth.getName());
+        User user = getContextUser();
         Set<Role> roles = user.getRoles();
         while(roles.iterator().hasNext()){
             Role role = roles.iterator().next();
@@ -69,20 +73,18 @@ public class UserController {
         return "redirect:/user/index";
     }
 
-    @RequestMapping(value={"/admin", "/admin/index"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/admin/index"}, method = RequestMethod.GET)
     public String adminIndex(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUserName(auth.getName());
-        model.addAttribute("userName", "Welcome " + user.getUserName() );
+        User user = getContextUser();
+        model.addAttribute("username", "Welcome " + user.getUsername() );
         model.addAttribute("userMessage","Contents only for admin.");
         return "/admin/index";
     }
 
-    @RequestMapping(value={"/user", "/user/index"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/user/index"}, method = RequestMethod.GET)
     public String userIndex(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUserName(auth.getName());
-        model.addAttribute("userName", "Welcome " + user.getUserName() );
+        User user = getContextUser();
+        model.addAttribute("username", "Welcome " + user.getUsername() );
         model.addAttribute("userMessage","Contents only for user.");
         return "/user/index";
     }

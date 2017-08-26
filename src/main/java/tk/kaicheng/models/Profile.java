@@ -1,32 +1,34 @@
 package tk.kaicheng.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "profile")
+@Table(name = "profile") // profile_id, profile_name, user_id, features, entries
 public class Profile{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "profile_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "profile_name")
     private String profileName;
 
-    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProfileFeature> profileFeatures;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user;// foreign key
 
-    public int getId() {
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    private Set<Feature> features; // one to many relationship
+
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    private Set<Entry> entries; // one to many relationship
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,20 +40,27 @@ public class Profile{
         this.profileName = profileName;
     }
 
-    // if profile.profileFeatures doesn't contain a profilepuslisher, then not show in profilepublisher table
-    public Set<ProfileFeature> getProfileFeatures() {
-        return profileFeatures;
-    }
-
-    public void setProfileFeatures(Set<ProfileFeature> profileFeatures) {
-        this.profileFeatures = profileFeatures;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Feature> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(Set<Feature> features) {
+        this.features = features;
+    }
+
+    public Set<Entry> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(Set<Entry> entries) {
+        this.entries = entries;
     }
 }

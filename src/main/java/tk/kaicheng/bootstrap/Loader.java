@@ -2,14 +2,13 @@ package tk.kaicheng.bootstrap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.kaicheng.models.*;
 import tk.kaicheng.repositories.FeatureRepository;
-import tk.kaicheng.repositories.ProfileRepository;
+import tk.kaicheng.repositories.EntryRepository;
 import tk.kaicheng.repositories.RoleRepository;
 import tk.kaicheng.repositories.UserRepository;
 
@@ -30,7 +29,7 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private ProfileRepository profileRepository;
+    private EntryRepository entryRepository;
     @Autowired
     private FeatureRepository featureRepository;
     @Autowired
@@ -61,9 +60,9 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
         }
         // create an admin called root and password is 123456
         String root = "root";
-        if(userRepository.findByUserName(root) == null){
+        if(userRepository.findByUsername(root) == null){
             User user = new User();
-            user.setUserName(root);
+            user.setUsername(root);
             user.setPassword(bCryptPasswordEncoder.encode("Guess my password, hehe."));
             Set<Role> set = new HashSet<>();
             set.add(roleRepository.findByRoleName(adminRoleName));
@@ -72,9 +71,9 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
         }
         // create a user called kaicheng and password is 123456
         String name = "kaicheng";
-        if(userRepository.findByUserName(name) == null){
+        if(userRepository.findByUsername(name) == null){
             User user = new User();
-            user.setUserName(name);
+            user.setUsername(name);
             user.setPassword(bCryptPasswordEncoder.encode("kaicheng"));
             Set<Role> set = new HashSet<>();
             set.add(roleRepository.findByRoleName(userRoleName));
@@ -82,9 +81,9 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
             userRepository.save(user);
         }
         name = "harrison";
-        if(userRepository.findByUserName(name) == null){
+        if(userRepository.findByUsername(name) == null){
             User user = new User();
-            user.setUserName(name);
+            user.setUsername(name);
             user.setPassword(bCryptPasswordEncoder.encode("harrison"));
             Set<Role> set = new HashSet<>();
             set.add(roleRepository.findByRoleName(userRoleName));

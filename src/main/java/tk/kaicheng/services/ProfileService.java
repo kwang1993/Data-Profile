@@ -1,10 +1,9 @@
 package tk.kaicheng.services;
 
 
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
-import tk.kaicheng.POJO.FeatureAndValue;
+import org.springframework.stereotype.Service;
+import tk.kaicheng.models.Entry;
+import tk.kaicheng.models.Profile;
 import tk.kaicheng.models.Profile;
 import tk.kaicheng.models.User;
 
@@ -13,8 +12,9 @@ import java.util.List;
 /**
  * Created by wangkaicheng on 2017/8/20.
  */
+
 public interface ProfileService {
-    Profile save(Profile profile);
+    void save(Profile profile);
 
     void deleteAll();
 
@@ -30,21 +30,5 @@ public interface ProfileService {
 
     List<Profile> findByUser(User user);
 
-    void updateProfileName(int profile_id, String newProfileName);
-
-    void saveProfileFeature(int profile_id, int feature_id, String featureValue);
-
-    void deleteProfileFeatureById(int profile_id, int feature_id);
-
-    void updateProfileFeatureByFeatureValue(int profile_id, int feature_id, String newFeatureValue);
-
-    String findProfileFeatureById(int profile_id, int feature_id);
-
-    List<FeatureAndValue> findFeatureAndValuesByProfileId(int profile_id);
-
-    FeatureAndValue findFeatureAndValueById(int profile_id, int feature_id);
-
-    List<Object[]> findProfileFeatureByProfileId(int profile_id);
-
-    List<Object[]> findAllProfileFeatures();
+    void updateProfileName(Integer profile_id, String newProfileName);
 }

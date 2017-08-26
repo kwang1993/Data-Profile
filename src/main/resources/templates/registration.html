@@ -20,9 +20,9 @@
 					<h2>Registration Form</h2>
 					<div class="form-group">
 						<div class="col-sm-9">
-							<label th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"
+							<label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
 								   class="validation-message"></label>
-							<input type="text" th:field="*{userName}" placeholder="Name"
+							<input type="text" th:field="*{username}" placeholder="Name"
 								   class="form-control" />
 						</div>
 					</div>

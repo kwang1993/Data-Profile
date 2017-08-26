@@ -2,6 +2,7 @@ package tk.kaicheng.services;
 
 
 import tk.kaicheng.models.Feature;
+import tk.kaicheng.models.Profile;
 import tk.kaicheng.models.User;
 
 import java.util.List;
@@ -23,11 +24,11 @@ public interface FeatureService {
 
     Feature findOne(Integer id);
 
-    List <Feature> findByUser(User user);
+    List <Feature> findByProfile(Profile profile);
 
-    Feature findByFeatureNameAndUser(String featureName, User user);
+    Feature findByFeatureNameAndProfile(String featureName, Profile profile);
 
-    void updateFeatureName(int feature_id, String newFeatureName);
+    void updateFeatureName(Integer feature_id, String newFeatureName);
 
-    List<Object[]> findProfileFeatureByFeatureId(int feature_id);
+    List<Object[]> findEntryFeatureByFeatureId(Integer feature_id);
 }

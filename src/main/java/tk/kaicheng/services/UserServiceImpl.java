@@ -63,13 +63,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findByUserName(String userName){
-        return userRepository.findByUserName(userName);
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 
     @Override
-    public List<Object> findUserRoleByUserId(int user_id) {
-        return userRepository.findUserRoleByUserId( user_id);
+    public List<Object> findUserRoleByUserId(Integer userId) {
+        return userRepository.findUserRoleByUserId( userId);
     }
 
     @Override
@@ -78,19 +78,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void deleteUserRoleById(int user_id, int role_id) {
-        userRepository.deleteUserRoleById(user_id, role_id);
+    public void deleteUserRoleById(Integer userId, Integer roleId) {
+        userRepository.deleteUserRoleById(userId, roleId);
     }
 
     @Override
-    public void saveUserRole(int user_id, int role_id) {
-        userRepository.saveUserRole(user_id, role_id);
+    public void saveUserRole(Integer userId, Integer roleId) {
+        userRepository.saveUserRole(userId, roleId);
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findByUsername(username);
         if(user == null) throw new UsernameNotFoundException("User name not found");
         List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
         return buildUserForAuthentication(user, authorities);
@@ -105,6 +105,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return grantedAuthorities;
     }
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 }

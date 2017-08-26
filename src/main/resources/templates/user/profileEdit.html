@@ -10,21 +10,15 @@
 
     <div class="container">
         <div class="starter-template">
-            <h2>Profile Feature Details</h2>
+            <h2>Profile Details</h2>
             <div>
-                <form class="form-horizontal" th:object="${featureAndValue}" th:action="${'/user/profile/' + featureAndValue.profileId + '/feature'}" method="post">
-                    <input type="hidden" th:field="*{profileId}"/>
-                    <input type="hidden" th:field="*{featureId}"/>
+                <form class="form-horizontal" th:object="${profile}" th:action="@{/user/profiles/saveOrUpdate}" method="post">
+                    <input type="hidden" th:field="*{id}"/>
+
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Feature Name:</label>
+                        <label class="col-sm-2 control-label">Profile Name:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" th:field="*{featureName}"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Feature Value:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" th:field="*{featureValue}"/>
+                            <input type="text" class="form-control" th:field="*{profileName}"/>
                         </div>
                     </div>
 

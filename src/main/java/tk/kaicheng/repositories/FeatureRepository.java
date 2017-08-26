@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import tk.kaicheng.models.Feature;
-import tk.kaicheng.models.ProfileFeature;
+import tk.kaicheng.models.Profile;
 import tk.kaicheng.models.User;
 
 import java.util.List;
@@ -17,14 +17,15 @@ import java.util.List;
  */
 @Repository
 public interface FeatureRepository extends JpaRepository<Feature, Integer> {
-    Feature findByFeatureNameAndUser(String featureName, User user);
-    List <Feature> findByUser(User user);
+
+    Feature findByFeatureNameAndProfile(String featureName, Profile Profile);
+    List <Feature> findByProfile(Profile profile);
 
     @Query(value = "update feature set feature_name = ?2 where feature_id = ?1", nativeQuery = true)
     @Modifying
     @Transactional
-    void updateFeatureName(int feature_id, String newFeatureName);
+    void updateFeatureName(Integer feature_id, String newFeatureName);
 
-    @Query(value = "select profile_id, feature_value from profile_feature where feature_id = ?1", nativeQuery = true)
-    List<Object[]> findProfileFeatureByFeatureId(int feature_id);
+    @Query(value = "select entry_id, feature_value from entry_feature where feature_id = ?1", nativeQuery = true)
+    List<Object[]> findEntryFeatureByFeatureId(Integer feature_id);
 }

@@ -1,28 +1,33 @@
 package tk.kaicheng.POJO;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by wangkaicheng on 2017/8/25.
  */
+@Component
 public class FeatureAndValue{
-    private int profileId;
-    private int featureId;
+//    private Integer profileId;
+    private Integer entryId;
+    private Integer featureId;
     private String featureName;
     private String featureValue;
 
     public FeatureAndValue(){}
-
-    public FeatureAndValue(int profileId, int featureId, String featureName, String featureValue){
-        this.profileId = profileId;
+    public FeatureAndValue( Integer entryId, Integer featureId, String featureName, String featureValue){
+//    public FeatureAndValue(Integer profileId, Integer entryId, Integer featureId, String featureName, String featureValue){
+//        this.profileId = profileId;
+        this.entryId = entryId;
         this.featureId = featureId;
         this.featureName = featureName;
         this.featureValue = featureValue;
     }
 
-    public int getFeatureId() {
+    public Integer getFeatureId() {
         return featureId;
     }
 
-    public void setFeatureId(int featureId) {
+    public void setFeatureId(Integer featureId) {
         this.featureId = featureId;
     }
 
@@ -42,11 +47,19 @@ public class FeatureAndValue{
         this.featureValue = featureValue;
     }
 
-    public int getProfileId() {
-        return profileId;
+//    public Integer getProfileId() {
+//        return profileId;
+//    }
+//
+//    public void setProfileId(Integer profileId) {
+//        this.profileId = profileId;
+//    }
+
+    public Integer getEntryId() {
+        return entryId;
     }
 
-    public void setProfileId(int profileId) {
-        this.profileId = profileId;
+    public void setEntryId(Integer entryId) {
+        this.entryId = entryId;
     }
 }

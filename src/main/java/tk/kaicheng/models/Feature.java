@@ -4,28 +4,30 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "feature")
+@Table(name = "feature") // feature_id, feature_name, profile_id, entry-features
 public class Feature {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "feature_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "feature_name")
     private String featureName;
 
-    @OneToMany(mappedBy = "feature")
-    private Set<ProfileFeature> profileFeatures;
-
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "profile_id")
+    private Profile profile; // foreign key
 
-    public int getId() {
+    @OneToMany(mappedBy = "feature")
+    private Set<EntryFeature> entryFeatures; // many to many with extra column featureValue
+
+
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -37,19 +39,19 @@ public class Feature {
         this.featureName = featureName;
     }
 
-    public Set<ProfileFeature> getProfileFeatures() {
-        return profileFeatures;
+    public Set<EntryFeature> getEntryFeatures() {
+        return entryFeatures;
     }
 
-    public void setProfileFeatures(Set<ProfileFeature> profileFeatures) {
-        this.profileFeatures = profileFeatures;
+    public void setEntryFeatures(Set<EntryFeature> entryFeatures) {
+        this.entryFeatures = entryFeatures;
     }
 
-    public User getUser() {
-        return user;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }
