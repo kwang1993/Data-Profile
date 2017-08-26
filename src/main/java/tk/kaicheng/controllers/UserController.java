@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,17 +30,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value={"/"}, method = RequestMethod.GET)
-    public String home(){
-        if(isLoggedIn()){
-            System.out.println("hello guest");
-        } else {
-            System.out.println(getLoggedUser());
-        }
-        return "index";
-    }
-
-    @RequestMapping(value={"/login"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/","/login"}, method = RequestMethod.GET)
     public String login(){
         if(isLoggedIn()) {
             return "login";
