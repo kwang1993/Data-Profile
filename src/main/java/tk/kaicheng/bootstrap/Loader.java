@@ -61,9 +61,9 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
         }
         // create an admin called root and password is 123456
         String root = "root";
-        if(userRepository.findByUserName(root) == null){
+        if(userRepository.findByUsername(root) == null){
             User user = new User();
-            user.setUserName(root);
+            user.setUsername(root);
             user.setPassword(bCryptPasswordEncoder.encode("Guess my password, hehe."));
             Set<Role> set = new HashSet<>();
             set.add(roleRepository.findByRoleName(adminRoleName));
@@ -72,9 +72,9 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
         }
         // create a user called kaicheng and password is 123456
         String name = "kaicheng";
-        if(userRepository.findByUserName(name) == null){
+        if(userRepository.findByUsername(name) == null){
             User user = new User();
-            user.setUserName(name);
+            user.setUsername(name);
             user.setPassword(bCryptPasswordEncoder.encode("kaicheng"));
             Set<Role> set = new HashSet<>();
             set.add(roleRepository.findByRoleName(userRoleName));
@@ -82,9 +82,9 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
             userRepository.save(user);
         }
         name = "harrison";
-        if(userRepository.findByUserName(name) == null){
+        if(userRepository.findByUsername(name) == null){
             User user = new User();
-            user.setUserName(name);
+            user.setUsername(name);
             user.setPassword(bCryptPasswordEncoder.encode("harrison"));
             Set<Role> set = new HashSet<>();
             set.add(roleRepository.findByRoleName(userRoleName));

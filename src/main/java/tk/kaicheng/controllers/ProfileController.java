@@ -36,7 +36,7 @@ public class ProfileController {
     // get user from security context
     private User getContextUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUserName(auth.getName());
+        User user = userService.findByUsername(auth.getName());
         return user;
     }
     @RequestMapping(value = "/user/profiles", method = RequestMethod.GET)

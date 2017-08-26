@@ -24,7 +24,7 @@ public interface UserService {
 
     User findOne(Integer id);
 
-    User findByUserName(String userName);
+    User findByUsername(String username);
 
     List<Object> findUserRoleByUserId(int user_id);
 

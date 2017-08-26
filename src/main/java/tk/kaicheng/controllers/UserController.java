@@ -50,9 +50,9 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String createNewUser(@Valid User user, BindingResult bindingResult, Model model) {
         System.out.println("Register Post");
-        User userExists = userService.findByUserName(user.getUserName());
+        User userExists = userService.findByUsername(user.getUsername());
         if (userExists != null) {
-            bindingResult.rejectValue("userName", "error.userName",
+            bindingResult.rejectValue("username", "error.username",
                             "There is already a user registered");
         }
         if (bindingResult.hasErrors()) {
@@ -67,7 +67,7 @@ public class UserController {
     public String postLogin(Model model){
         System.out.println("postLogin");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUserName(auth.getName());
+        User user = userService.findByUsername(auth.getName());
         Set<Role> roles = user.getRoles();
         while(roles.iterator().hasNext()){
             Role role = roles.iterator().next();
@@ -81,8 +81,8 @@ public class UserController {
     public String adminIndex(Model model){
         System.out.println("adminIndex");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUserName(auth.getName());
-        model.addAttribute("userName", "Welcome " + user.getUserName() );
+        User user = userService.findByUsername(auth.getName());
+        model.addAttribute("username", "Welcome " + user.getUsername() );
         model.addAttribute("userMessage","Contents only for admin.");
         return "/admin/index";
     }
@@ -91,8 +91,8 @@ public class UserController {
     public String userIndex(Model model){
         System.out.println("userIndex");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUserName(auth.getName());
-        model.addAttribute("userName", "Welcome " + user.getUserName() );
+        User user = userService.findByUsername(auth.getName());
+        model.addAttribute("username", "Welcome " + user.getUsername() );
         model.addAttribute("userMessage","Contents only for user.");
         return "/user/index";
     }

@@ -62,8 +62,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findByUserName(String userName){
-        return userRepository.findByUserName(userName);
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findByUsername(username);
         if(user == null) throw new UsernameNotFoundException("User name not found");
         List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
         return buildUserForAuthentication(user, authorities);
@@ -103,6 +103,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return grantedAuthorities;
     }
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 }

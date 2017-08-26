@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    User findByUserName(String userName);
+    User findByUsername(String username);
 
     @Query(value = "select role_id from user_role where user_id = ?1", nativeQuery = true)
     List<Object> findUserRoleByUserId(int user_id);
