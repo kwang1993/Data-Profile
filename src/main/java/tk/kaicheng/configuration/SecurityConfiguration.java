@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
             http
                 .authorizeRequests()
-                    .antMatchers("/","/login","/registration").permitAll()
+                    .antMatchers("/","/login","/register").permitAll()
                     .antMatchers("/template").permitAll() //Test
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                     .antMatchers("/user/**").hasAuthority("USER")
@@ -53,6 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .and()
                 .formLogin()
                     .loginPage("/login")
+                    .permitAll()
                     .failureUrl("/login?error=true")
                     .defaultSuccessUrl("/loginSuccess")
                     .usernameParameter("username")
@@ -61,6 +62,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/")
+                    .invalidateHttpSession(true)
+                    .and()
+                .httpBasic()
                     .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }

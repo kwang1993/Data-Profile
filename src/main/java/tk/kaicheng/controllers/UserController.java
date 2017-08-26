@@ -39,14 +39,14 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="/registration", method = RequestMethod.GET)
-    public String registration(Model model){
+    @RequestMapping(value="/register", method = RequestMethod.GET)
+    public String register(Model model){
         System.out.println("Register Get");
         model.addAttribute("user", new User());
-        return "registration";
+        return "register";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String createNewUser(@Valid User user, BindingResult bindingResult, Model model) {
         System.out.println("Register Post");
         User userExists = userService.findByUsername(user.getUsername());
@@ -55,10 +55,10 @@ public class UserController {
                             "There is already a user registered");
         }
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return "register";
         } else {
             userService.save(user);
-            return "postRegistration";
+            return "postRegister";
         }
    }
 
@@ -73,7 +73,7 @@ public class UserController {
             if(role.getRoleName().equals("ADMIN"))return "redirect:/admin/index";
             if(role.getRoleName().equals("USER"))return "redirect:/user/index";
         }
-        return "redirect:/user/index";
+        return "redirect:/user";
     }
 
     @RequestMapping(value={"/admin", "/admin/index"}, method = RequestMethod.GET)
