@@ -16,6 +16,7 @@ import tk.kaicheng.models.User;
 import tk.kaicheng.services.RoleService;
 import tk.kaicheng.services.UserService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
@@ -30,14 +31,21 @@ public class UserController {
 
     @RequestMapping(value={"/"}, method = RequestMethod.GET)
     public String home(){
-        System.out.println("Home");
+        if(isLoggedIn()){
+            System.out.println("hello guest");
+        } else {
+            System.out.println(getLoggedUser());
+        }
         return "index";
     }
 
     @RequestMapping(value={"/login"}, method = RequestMethod.GET)
     public String login(){
-        System.out.println("login");
-        return "login";
+        if(isLoggedIn()) {
+            return "login";
+        } else {
+            return "redirect:/user/index";
+        }
     }
 
     @RequestMapping(value="/registration", method = RequestMethod.GET)
@@ -64,7 +72,7 @@ public class UserController {
    }
 
     @RequestMapping(value="/postLogin", method = RequestMethod.GET)
-    public String postLogin(Model model){
+    public String postLogin(Model model,HttpSession session){
         System.out.println("postLogin");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
@@ -107,5 +115,16 @@ public class UserController {
     public String template() {
         System.out.println("template");
         return "template";
+    }
+
+    private boolean isLoggedIn(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByUsername(auth.getName());
+        return user == null;
+    }
+    private String getLoggedUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByUsername(auth.getName());
+        return user.getUsername();
     }
 }

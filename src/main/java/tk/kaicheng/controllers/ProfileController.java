@@ -101,7 +101,6 @@ public class ProfileController {
         return "redirect:/user/profile/" + profile.getId();
     }
 
-
     // profile-feature pairs
     @RequestMapping(value = "/user/profile/{id}/edit/{featureId}", method = RequestMethod.GET)
     public String editFeature(@PathVariable Integer id, @PathVariable Integer featureId, Model model){
