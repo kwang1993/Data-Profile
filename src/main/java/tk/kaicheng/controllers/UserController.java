@@ -28,22 +28,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-<<<<<<< HEAD
     // get user from security context
     private User getContextUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
         return user;
     }
-    @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
-=======
+
     @RequestMapping(value={"/"}, method = RequestMethod.GET)
     public String home(){
         return "index";
     }
 
     @RequestMapping(value={"/login"}, method = RequestMethod.GET)
->>>>>>> origin/master
     public String login(){
         return "login";
     }
