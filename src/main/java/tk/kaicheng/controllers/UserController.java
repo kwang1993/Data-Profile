@@ -56,7 +56,7 @@ public class UserController {
             return "register";
         } else {
             userService.save(user);
-            return "postRegistration";
+            return "postRegister";
         }
 
     }
