@@ -10,7 +10,44 @@
 	<form th:action="@{/}" method="get">
 		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
 	</form>
-	<div th:replace="fragments/register :: registerForm"/>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<form autocomplete="off" action="#" th:action="@{/register}"
+					  th:object="${user}" method="post" class="form-horizontal"
+					  role="form">
+					<h2>Register Form</h2>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+								   class="validation-message"></label>
+							<input type="text" th:field="*{username}" placeholder="Name"
+								   class="form-control" />
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<input type="password" th:field="*{password}"
+								   placeholder="Password" class="form-control" /> <label
+								th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+								class="validation-message"></label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<button type="submit" class="btn btn-primary btn-block">Register User</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
 
