@@ -37,13 +37,9 @@ public class FeatureController {
     private Profile getContextProfile(Integer profileId){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
-<<<<<<< HEAD
-        return user;
-=======
         Profile profile = profileService.findOne(profileId);
         if (profile.getUser() != user) return null;
         return profile;
->>>>>>> 42dc2d8a50a7ac759bfbb3fc2a93d4179166fd74
     }
 
     @RequestMapping(value = "/user/profiles/{profileId}/features", method = RequestMethod.GET)

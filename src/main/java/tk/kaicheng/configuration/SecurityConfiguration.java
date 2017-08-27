@@ -43,24 +43,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-<<<<<<< HEAD
-            http
-                .authorizeRequests()
-                    .antMatchers("/","/login","/register").permitAll()
-                    .antMatchers("/template").permitAll() //Test
-                    .antMatchers("/admin/**").hasAuthority("ADMIN")
-                    .antMatchers("/user/**").hasAuthority("USER")
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
-                    .failureUrl("/login?error=true")
-                    .defaultSuccessUrl("/loginSuccess")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .and()
-=======
 
             http.csrf().disable()
                 .formLogin()
@@ -79,14 +61,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
 
->>>>>>> 42dc2d8a50a7ac759bfbb3fc2a93d4179166fd74
                 .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/")
-                    .invalidateHttpSession(true)
-                    .and()
-                .httpBasic()
-                    .and()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
     @Override

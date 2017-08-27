@@ -10,8 +10,8 @@
 </head>
 
 <body>
-	<form th:action="@{/register}" method="get">
-		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Register Page</button>
+	<form th:action="@{/registration}" method="get">
+		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
 	</form>
 
 	<div class="container">
@@ -20,11 +20,7 @@
 			<h3 class="form-signin-heading" th:text="Welcome"></h3>
 			<br/>
 
-<<<<<<< HEAD
-			<input type="text" id="username" name="username"  th:placeholder="username"
-=======
 			<input type="text" id="username" name="username"  th:placeholder="Username"
->>>>>>> 42dc2d8a50a7ac759bfbb3fc2a93d4179166fd74
 				   class="form-control" /> <br/>
 			<input type="password"  th:placeholder="Password"
 				   id="password" name="password" class="form-control" /> <br />
@@ -34,6 +30,6 @@
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
 		</form>
-	</div>
+
 </body>
 </html>
