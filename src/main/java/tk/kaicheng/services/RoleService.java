@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by wangkaicheng on 2017/8/23.
  */
-@Service
+
 public interface RoleService {
     void save(Role role);
 
@@ -26,5 +26,5 @@ public interface RoleService {
 
     Role findByRoleName(String role);
 
-    List<Object> findUserRoleByRoleId(int role_id);
+    List<Object> findUserRoleByRoleId(Integer role_id);
 }

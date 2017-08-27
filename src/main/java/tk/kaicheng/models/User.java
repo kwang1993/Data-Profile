@@ -13,7 +13,7 @@ import java.util.Set;
  * Created by wangkaicheng on 2017/8/4.
  */
 @Entity
-@Table(name = "user")
+@Table(name = "user") // user_id, user_name. password, user-roles, profiles
 public class User {
 
     @Id
@@ -21,7 +21,7 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
-    @Column(name = "user_name", unique = true)
+    @Column(name = "username", unique = true)
     @NotEmpty(message = "*Please provide your user name")
     private String username;
 
@@ -32,19 +32,16 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.MERGE) // MERGE works for test rather than ALL, https://stackoverflow.com/questions/13370221/jpa-hibernate-detached-entity-passed-to-persist
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<Role> roles; // many to many relationship
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Profile> profiles;
+    private Set<Profile> profiles; // one to many relationship
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Feature> features;
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -80,11 +77,4 @@ public class User {
         this.profiles = profiles;
     }
 
-    public Set<Feature> getFeatures() {
-        return features;
-    }
-
-    public void setFeatures(Set<Feature> features) {
-        this.features = features;
-    }
 }

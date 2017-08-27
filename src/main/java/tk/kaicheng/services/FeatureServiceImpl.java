@@ -4,6 +4,7 @@ package tk.kaicheng.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.kaicheng.models.Feature;
+import tk.kaicheng.models.Profile;
 import tk.kaicheng.models.User;
 import tk.kaicheng.repositories.FeatureRepository;
 
@@ -51,23 +52,23 @@ public class FeatureServiceImpl implements FeatureService {
     }
 
     @Override
-    public List<Feature> findByUser(User user) {
-        return featureRepository.findByUser(user);
+    public List<Feature> findByProfile(Profile profile) {
+        return featureRepository.findByProfile(profile);
     }
 
     @Override
-    public Feature findByFeatureNameAndUser(String featureName, User user) {
-        return featureRepository.findByFeatureNameAndUser(featureName, user);
+    public Feature findByFeatureNameAndProfile(String featureName, Profile profile) {
+        return featureRepository.findByFeatureNameAndProfile(featureName, profile);
     }
 
     @Override
-    public void updateFeatureName(int feature_id, String newFeatureName) {
+    public void updateFeatureName(Integer feature_id, String newFeatureName) {
         featureRepository.updateFeatureName(feature_id, newFeatureName);
     }
 
     @Override
-    public List<Object[]> findProfileFeatureByFeatureId(int feature_id) {
-        return featureRepository.findProfileFeatureByFeatureId(feature_id);
+    public List<Object[]> findEntryFeatureByFeatureId(Integer feature_id) {
+        return featureRepository.findEntryFeatureByFeatureId(feature_id);
     }
 
 }

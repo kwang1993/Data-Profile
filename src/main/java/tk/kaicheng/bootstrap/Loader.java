@@ -2,14 +2,13 @@ package tk.kaicheng.bootstrap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.kaicheng.models.*;
 import tk.kaicheng.repositories.FeatureRepository;
-import tk.kaicheng.repositories.ProfileRepository;
+import tk.kaicheng.repositories.EntryRepository;
 import tk.kaicheng.repositories.RoleRepository;
 import tk.kaicheng.repositories.UserRepository;
 
@@ -30,7 +29,7 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private ProfileRepository profileRepository;
+    private EntryRepository entryRepository;
     @Autowired
     private FeatureRepository featureRepository;
     @Autowired

@@ -5,12 +5,12 @@ import java.io.Serializable;
 
 
 @Entity
-@Table(name = "profile_feature")
-public class ProfileFeature implements Serializable{
+@Table(name = "entry_feature") // entry_id, feature_id, feature_value
+public class EntryFeature implements Serializable{
     @Id
     @ManyToOne
-    @JoinColumn(name = "profile_id")
-    private Profile profile;
+    @JoinColumn(name = "entry_id")
+    private Entry entry;
 
     @Id
     @ManyToOne
@@ -20,12 +20,12 @@ public class ProfileFeature implements Serializable{
     @Column(name = "feature_value")
     private String featureValue;
 
-    public Profile getProfile() {
-        return profile;
+    public Entry getEntry() {
+        return entry;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setEntry(Entry entry) {
+        this.entry = entry;
     }
 
     public Feature getFeature() {

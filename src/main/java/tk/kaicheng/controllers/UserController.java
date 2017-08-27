@@ -30,6 +30,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+<<<<<<< HEAD
     @RequestMapping(value={"/","/login"}, method = RequestMethod.GET)
     public String login(Model model){
         model.addAttribute("user", new User());
@@ -38,6 +39,23 @@ public class UserController {
         } else {
             return "redirect:/user/index";
         }
+=======
+    // get user from security context
+    private User getContextUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByUsername(auth.getName());
+        return user;
+    }
+
+    @RequestMapping(value={"/"}, method = RequestMethod.GET)
+    public String home(){
+        return "index";
+    }
+
+    @RequestMapping(value={"/login"}, method = RequestMethod.GET)
+    public String login(){
+        return "login";
+>>>>>>> 42dc2d8a50a7ac759bfbb3fc2a93d4179166fd74
     }
 
     @RequestMapping(value="/register", method = RequestMethod.GET)
@@ -48,7 +66,10 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String createNewUser(@Valid User user, BindingResult bindingResult, Model model) {
+<<<<<<< HEAD
         System.out.println("Register Post");
+=======
+>>>>>>> 42dc2d8a50a7ac759bfbb3fc2a93d4179166fd74
         User userExists = userService.findByUsername(user.getUsername());
         if (userExists != null) {
             bindingResult.rejectValue("username", "error.username",
@@ -62,11 +83,19 @@ public class UserController {
         }
    }
 
+<<<<<<< HEAD
     @RequestMapping(value="/loginSuccess", method = RequestMethod.GET)
     public String loginSuccess(Model model,HttpSession session){
         System.out.println("loginSuccess");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
+=======
+    }
+
+    @RequestMapping(value="/postLogin", method = RequestMethod.GET)
+    public String postLogin(Model model){
+        User user = getContextUser();
+>>>>>>> 42dc2d8a50a7ac759bfbb3fc2a93d4179166fd74
         Set<Role> roles = user.getRoles();
         while(roles.iterator().hasNext()){
             Role role = roles.iterator().next();
@@ -76,21 +105,29 @@ public class UserController {
         return "redirect:/user";
     }
 
-    @RequestMapping(value={"/admin", "/admin/index"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/admin/index"}, method = RequestMethod.GET)
     public String adminIndex(Model model){
+<<<<<<< HEAD
         System.out.println("adminIndex");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
+=======
+        User user = getContextUser();
+>>>>>>> 42dc2d8a50a7ac759bfbb3fc2a93d4179166fd74
         model.addAttribute("username", "Welcome " + user.getUsername() );
         model.addAttribute("userMessage","Contents only for admin.");
         return "/admin/index";
     }
 
-    @RequestMapping(value={"/user", "/user/index"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/user/index"}, method = RequestMethod.GET)
     public String userIndex(Model model){
+<<<<<<< HEAD
         System.out.println("userIndex");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
+=======
+        User user = getContextUser();
+>>>>>>> 42dc2d8a50a7ac759bfbb3fc2a93d4179166fd74
         model.addAttribute("username", "Welcome " + user.getUsername() );
         model.addAttribute("userMessage","Contents only for user.");
         return "/user/index";

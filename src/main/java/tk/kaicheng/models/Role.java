@@ -3,21 +3,21 @@ package tk.kaicheng.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "role")
+@Table(name = "role") // role_id, role_name
 public class Role {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="role_id")
-	private int id;
+	private Integer id;
 
 	@Column(name="role_name", unique = true)
 	private String roleName;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

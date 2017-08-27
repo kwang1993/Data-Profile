@@ -20,32 +20,39 @@
 
         </div>
 
-        <div th:if="${not #lists.isEmpty(featureAndValues)}">
-            <h2>Feature Value List</h2>
+        <div th:if="${not #lists.isEmpty(entries)}">
+            <h2>Entry-Feature Table</h2>
             <table class="table table-striped">
                 <tr>
                     <!--<th>Id</th>-->
-                    <th>Feature Name</th>
-                    <th>Feature Value</th>
+                    <th>Entry Name</th>
+                    <th>View</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
-                <tr th:each="featureAndValue : ${featureAndValues}">
+                <tr th:each="entry : ${entries}">
                     <!--<td th:text="${profile.id}">
                         <a href="/user/profiles/${profile.id}">Id</a>
                     </td>-->
-                    <td th:text="${featureAndValue.featureName}">Feature Name</td>
-                    <td th:text="${featureAndValue.featureValue}">Feature Value</td>
+                    <td th:text="${entry.entryName}">Entry Name</td>
                     <td>
-                        <a th:href="${'/user/profile/' + featureAndValue.profileId + '/edit/' + featureAndValue.featureId}"
+                        <a th:href="${'/user/profiles/' + profile.id + '/entries/' + entry.id + '/view'}"
                            class="btn btn-primary a-btn-slide-text">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                            <span><strong>Edit</strong></span>
+                            <span><strong>View</strong></span>
                         </a>
                         <!--<a th:href="${'/user/profile/edit/' + profile.id}">Edit</a>-->
                     </td>
                     <td>
-                        <a th:href="${'/user/profile/' + featureAndValue.profileId + '/delete/' + featureAndValue.featureId}"
+                        <a th:href="${'/user/profiles/' + profile.id + '/entries/' + entry.id + '/edit'}"
+                           class="btn btn-primary a-btn-slide-text">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <span><strong>Edit</strong></span>
+                        </a>
+                        <!--<a th:href="${'/user/profile/delete/' + profile.id}">Delete</a>-->
+                    </td>
+                    <td>
+                        <a th:href="${'/user/profiles/' + profile.id + '/entries/' + entry.id + '/delete'}"
                            class="btn btn-primary a-btn-slide-text">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             <span><strong>Delete</strong></span>
@@ -56,7 +63,7 @@
             </table>
         </div>
 
-        <a th:href="${'/user/profile/'+ profile.id +'/feature/new'}"
+        <a th:href="${'/user/profiles/'+ profile.id +'/entries/new'}"
            class="btn btn-primary a-btn-slide-text">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             <span><strong>Add</strong></span>

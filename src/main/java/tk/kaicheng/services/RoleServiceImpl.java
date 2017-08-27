@@ -1,6 +1,7 @@
 package tk.kaicheng.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tk.kaicheng.models.Role;
 import tk.kaicheng.models.User;
 import tk.kaicheng.repositories.RoleRepository;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by wangkaicheng on 2017/8/23.
  */
+@Service
 public class RoleServiceImpl implements RoleService {
     @Autowired
     RoleRepository roleRepository;
@@ -50,7 +52,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Object> findUserRoleByRoleId(int role_id) {
+    public List<Object> findUserRoleByRoleId(Integer role_id) {
         return roleRepository.findUserRoleByRoleId(role_id);
     }
 }
