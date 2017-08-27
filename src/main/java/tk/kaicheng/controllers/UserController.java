@@ -45,13 +45,7 @@ public class UserController {
         User user = userService.findByUsername(auth.getName());
         return user;
     }
-
-    @RequestMapping(value={"/"}, method = RequestMethod.GET)
-    public String home(){
-        return "index";
-    }
-
-    @RequestMapping(value={"/login"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public String login(){
         return "login";
 >>>>>>> 42dc2d8a50a7ac759bfbb3fc2a93d4179166fd74
