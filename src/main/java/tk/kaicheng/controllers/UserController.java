@@ -35,18 +35,17 @@ public class UserController {
         return user;
     }
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
-    public String login(Model model){
-        model.addAttribute("user", new User());
+    public String login(){
         return "login";
     }
 
-    @RequestMapping(value="/register", method = RequestMethod.GET)
-    public String register(Model model){
+    @RequestMapping(value="/registration", method = RequestMethod.GET)
+    public String registration(Model model){
         model.addAttribute("user", new User());
-        return "register";
+        return "registration";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String createNewUser(@Valid User user, BindingResult bindingResult, Model model) {
         User userExists = userService.findByUsername(user.getUsername());
         if (userExists != null) {
@@ -54,7 +53,7 @@ public class UserController {
                             "There is already a user registered");
         }
         if (bindingResult.hasErrors()) {
-            return "register";
+            return "registration";
         } else {
             userService.save(user);
             return "postRegistration";
