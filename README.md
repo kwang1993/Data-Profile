@@ -7,7 +7,7 @@ MySQL 5.6.27<br />
 IntelliJ 2017.1
 
 ### Database design
-![design](src/main/resources/static/images/DB design.jpg)
+![design](src/main/resources/static/images/DB%20design.JPG)
 
 ### Java Web
 Spring Boot <br />
