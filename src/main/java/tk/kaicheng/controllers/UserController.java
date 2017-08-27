@@ -31,7 +31,8 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value={"/","/login"}, method = RequestMethod.GET)
-    public String login(){
+    public String login(Model model){
+        model.addAttribute("user", new User());
         if(isLoggedIn()) {
             return "login";
         } else {
@@ -41,7 +42,6 @@ public class UserController {
 
     @RequestMapping(value="/register", method = RequestMethod.GET)
     public String register(Model model){
-        System.out.println("Register Get");
         model.addAttribute("user", new User());
         return "register";
     }
